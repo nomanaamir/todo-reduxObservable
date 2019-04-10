@@ -1,0 +1,41 @@
+.dashboard_container .input_container{
+    display: flex;
+    justify-content: center;
+}
+.dashboard_container .input_container > input{
+    color: brown;
+    font-size: 20px;
+    height: 30px;
+    outline: none;
+    width: 350px;
+    border: none;
+    padding-left: 10px;
+    box-shadow: 0px 0px 2px grey;
+}
+
+.dashboard_container .input_container > button{
+    width: 120px;
+    box-shadow: 0px 0px 2px grey;
+    border: none;
+    color: red;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    outline: none;
+
+}
+
+.dashboard_container .todos_container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.dashboard_container .todos_container > span{
+    font-size: 25px;
+    margin: 2px;
+    color: brown;
+    text-transform: capitalize;
+}
