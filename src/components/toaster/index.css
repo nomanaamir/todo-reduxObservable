@@ -1,0 +1,19 @@
+.toaster_container{
+    display: flex;
+    justify-content: center;
+}
+.toaster_container .toaster{
+    position: absolute;
+    bottom: 0;
+    letter-spacing: 1px;
+    font-size: 18px;
+    background-color: #333;
+    color: white;
+    height: 50px;
+    border-radius: 4px;
+    width: 235px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 2px grey;
+}

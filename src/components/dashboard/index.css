@@ -1,8 +1,27 @@
-.dashboard_container .input_container{
+body{
+    margin: 0;
+    overflow: hidden;
+}
+.dashboard_container .header{
+    box-shadow: 2px 2px 2px darkgrey;
+    background: lightgray;
+    height: 60px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.dashboard_container .header > span{
+    font-size: 30px;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+.dashboard_container .input_container {
     display: flex;
     justify-content: center;
 }
-.dashboard_container .input_container > input{
+
+.dashboard_container .input_container>input {
     color: brown;
     font-size: 20px;
     height: 30px;
@@ -13,19 +32,31 @@
     box-shadow: 0px 0px 2px grey;
 }
 
-.dashboard_container .input_container > button{
+.dashboard_container .input_container>button {
     width: 120px;
     box-shadow: 0px 0px 2px grey;
     border: none;
-    color: red;
+    background: lightblue;
+    color: white;
+    text-transform: uppercase;
     font-size: 18px;
     letter-spacing: 1px;
     cursor: pointer;
     outline: none;
+    transition: .5s
+
 
 }
 
-.dashboard_container .todos_container{
+.dashboard_container .input_container>.disabled {
+    background-color: #cccccc;
+    color: #666666;
+}
+.dashboard_container .input_container>.update{
+    background: lightgreen;
+    color: lightseagreen;
+}
+.dashboard_container .todos_container {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -33,9 +64,67 @@
     margin-top: 20px;
 }
 
-.dashboard_container .todos_container > span{
+.dashboard_container .todos_container>table {
+    width: 100%;
+}
+.dashboard_container .todos_container>table > tbody{
+    background: lightgray;
+}
+.dashboard_container .todos_container>table > tbody >tr>th {
+    line-height: 4;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+    color: white
+
+}
+
+.dashboard_container .todos_container>table > tbody >tr>td {
+    text-align: center;
+    line-height: 2;
+    font-size: 20px;
+    /* margin: 2px; */
+    color: brown;
+    text-transform: capitalize;
+}
+
+.dashboard_container .todos_container>table > tbody >tr>td:nth-child(3),
+td:nth-child(4) {
+    cursor: pointer;
+}
+
+.dashboard_container .todos_container .ifTodosNot {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.dashboard_container .todos_container .ifTodosNot>table > tbody{
+    background: lightgray;
+}
+.dashboard_container .todos_container .ifTodosNot>table > tbody >tr>th {
+    line-height: 4;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+    color: white
+}
+
+.dashboard_container .todos_container .ifTodosNot>div {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 200px;
+}
+
+.dashboard_container .todos_container .ifTodosNot>div>span {
+    color: red;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* .dashboard_container .todos_container > span{
     font-size: 25px;
     margin: 2px;
     color: brown;
     text-transform: capitalize;
-}
+} */
