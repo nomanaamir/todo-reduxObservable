@@ -5,7 +5,6 @@ const initial_state = {
 }
 
 export function todoReducer(state = initial_state, action) {
-    console.warn('Reducer Listening !!!', action.payload);
     switch (action.type) {
         case TodoAction.ADD_TODO:
             return ({
@@ -22,8 +21,6 @@ export function todoReducer(state = initial_state, action) {
             editState.splice(action.index, 1)
 
             editState.splice(action.index, 0, action.value)
-
-            console.warn('=-=-=-=-Reducerrr', action.value, action.index)
 
             return ({
                 ...state, todos: editState

@@ -22,7 +22,6 @@ export class TodoAction {
         }
     }
     static editTodo(val, ind) {
-        console.log('editAction=-=-=-=-=-', val, ind)
         return {
             type: TodoAction.EDIT_TODO,
             value: val,

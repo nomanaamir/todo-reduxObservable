@@ -9,18 +9,21 @@ class DashboardComponent extends Component {
         this.state = {
             todo: '',
             editflag: false,
-            updateIndex: null
+            updateIndex: null,
+            completeTodos: [],
+            completeFlag: false
         }
     }
+
     todoBind(ev) {
         this.setState({ todo: ev.target.value });
-        this.props.sendToaster('', false)
+        // this.props.sendToaster('', false)
 
     }
     addTodo() {
         if (this.props.todoData.length === 10) {
             this.setState({ todo: '' })
-            this.props.sendToaster('Limit Reach')
+            this.props.sendToaster("Diary's limit reached")
 
         } else {
             this.props.addTodo(this.state.todo)
@@ -31,6 +34,7 @@ class DashboardComponent extends Component {
     }
     deleteTodo(ind) {
         this.props.deleteTodo(ind)
+        this.setState({ editflag: false, todo: '' })
         this.props.sendToaster('Successfully Deleted')
 
     }
@@ -38,12 +42,26 @@ class DashboardComponent extends Component {
         this.setState({ editflag: true, todo: val, updateIndex: ind })
     }
     updateTodo() {
-        this.props.editTodo(this.state.todo, this.state.updateIndex)
-        this.props.sendToaster('Successfully Updated')
-        this.setState({ editflag: false, todo: '', updateIndex: null })
+        if (this.state.todo.split(" ").join("")) {
+            this.props.editTodo(this.state.todo, this.state.updateIndex)
+            this.props.sendToaster('Successfully Updated')
+            this.setState({ editflag: false, todo: '', updateIndex: null })
+
+        }
 
     }
+    completeTodo(ind) {
+        var complete = [...this.state.completeTodos]
+        if (this.state.completeTodos.indexOf(ind) === -1) {
+            complete.push(ind)
+
+        } else {
+            complete = complete.filter((item) => item !== ind)
+        }
+        this.setState({ completeTodos: complete })
+    }
     render() {
+        // console.warn('hello', this.state.completeFlag)
         return (
             <div className='dashboard_container'>
                 <div className="header">
@@ -62,27 +80,28 @@ class DashboardComponent extends Component {
                             <table>
                                 <tbody>
                                     <tr>
-                                        <th> S.NO </th>
-                                        <th> TODOS </th>
+                                        <th> TODOS <sup><span className='badge'>{this.props.todoData.length}</span></sup> </th>
                                         <th> DELETE </th>
                                         <th> EDIT </th>
+                                        <th> COMPLETE </th>
                                     </tr>
                                     {
                                         this.props.todoData.map((val, ind) => {
                                             return (
                                                 <tr key={ind}>
-                                                    <td>
-                                                        {ind + 1}
-                                                    </td>
-                                                    <td>
+                                                    <td className={this.state.completeTodos.indexOf(ind) !== -1 ? 'complete_todo' : null} >
                                                         {val}
                                                     </td>
+
                                                     <td onClick={() => this.deleteTodo(ind)}>
-                                                        Delete
-                                        </td>
+                                                    <i class="fas fa-eraser"></i>
+                                                    </td>
                                                     <td onClick={() => this.editTodo(val, ind)}>
-                                                        Edit
-                                        </td>
+                                                    <i class="far fa-edit"></i>
+                                                    </td>
+                                                    <td onClick={() => this.completeTodo(ind)}>
+                                                        {this.state.completeTodos.indexOf(ind) !== -1 ? <i class="far fa-check-square grey"></i> : <i class="far fa-check-square"></i>}
+                                                    </td>
                                                 </tr>
                                             )
                                         })
@@ -94,10 +113,10 @@ class DashboardComponent extends Component {
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <th> S.NO </th>
-                                            <th> TODOS </th>
+                                            <th> TODOS <sup><span className='badge'>{this.props.todoData.length}</span></sup> </th>
                                             <th> DELETE </th>
                                             <th> EDIT </th>
+                                            <th> COMPLETE </th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -118,7 +137,6 @@ class DashboardComponent extends Component {
     }
 }
 const mapStateToProps = state => {
-    console.warn('state', state.todoReducer.todos)
     return {
         todoData: state.todoReducer.todos,
     }

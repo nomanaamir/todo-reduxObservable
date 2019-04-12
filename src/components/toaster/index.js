@@ -5,22 +5,26 @@ import { TodoAction } from '../../store/action/todo-action';
 import { connect } from 'react-redux';
 
 class ToasterComponent extends Component {
-    constructor() {
-        super();
-        // this.state = {
-        //     toasterFlag: false
-        // }
+    constructor(props) {
+        super(props);
+        this.timer = null
     }
-    componentWillReceiveProps() {
-        setTimeout(() => {
-            this.props.sendToaster('');
-        }, 2000);
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.toasterMsg) {
+
+            this.timer = setTimeout(() => {
+                this.props.sendToaster('');
+            }, 1500);
+        }
+        else {
+            clearTimeout(this.timer)
+        }
     }
     render() {
         return (
             this.props.toasterMsg ?
                 <div className="toaster_container">
-                    <div className="toaster bounceIn animated">
+                    <div className="toaster slideInUp animated">
                         {this.props.toasterMsg}
                     </div>
                 </div>
@@ -29,7 +33,7 @@ class ToasterComponent extends Component {
     }
 }
 const mapStateToProps = state => {
-    console.warn('state', state.todoReducer.todos)
+    // console.warn('state', state.todoReducer.todos)
     return {
         toasterMsg: state.todoReducer.toasterMsg,
     }
